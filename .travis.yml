@@ -13,4 +13,11 @@ after_success:
   - docker build -t hirokitominaga/multi-client ./client
   - docker build -t hirokitominaga/multi-nginx ./nginx
   - docker build -t hirokitominaga/multi-server ./server
-  - docker build -t hirokitominaga/multi-server ./server
+  - docker build -t hirokitominaga/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSOWRD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push hirokitominaga/multi-client
+  - docker push hirokitominaga/multi-nginx
+  - docker push hirokitominaga/multi-server
+  - docker push hirokitominaga/multi-worker
